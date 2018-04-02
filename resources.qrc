@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/pola">
+        <file>PNG/pole1.png</file>
+        <file>PNG/pole2.png</file>
+    </qresource>
+    <qresource prefix="/czarne">
+        <file>PNG/goniec_c.png</file>
+        <file>PNG/hetman_c.png</file>
+        <file>PNG/kon_c.png</file>
+        <file>PNG/krol_c.png</file>
+        <file>PNG/pionek_c.png</file>
+        <file>PNG/wieza_c.png</file>
+    </qresource>
+    <qresource prefix="/biale">
+        <file>PNG/goniec_b.png</file>
+        <file>PNG/hetman_b.png</file>
+        <file>PNG/kon_b.png</file>
+        <file>PNG/krol_b.png</file>
+        <file>PNG/pionek_b.png</file>
+        <file>PNG/wieza_b.png</file>
+    </qresource>
+</RCC>
