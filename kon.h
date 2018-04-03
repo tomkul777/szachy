@@ -10,4 +10,6 @@ public:
     bool sprawdzRuch(int x, int y);
 };
 
+bool operator ==(Kon &k1, Kon &k2);
+
 #endif // KON_H

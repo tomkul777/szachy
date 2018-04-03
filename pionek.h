@@ -13,4 +13,6 @@ public:
     bool sprawdzRuch(int x, int y);
 };
 
+bool operator ==(Pionek &p1, Pionek &p2);
+
 #endif // PIONEK_H

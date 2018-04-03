@@ -3,10 +3,11 @@
 
 Pionek::Pionek(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
+    this->nazwa = "Pionek";
+    this->czyRuszany = false;
+
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/pionek_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/pionek_c.png"));
-
-    this->czyRuszany = false;
 
     this->setGeometry(x*80, y*80, 80, 80);
 }
@@ -29,8 +30,10 @@ bool Pionek::sprawdzRuch(int x, int y)
                             if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                             else {
                                 //TUTAJ BEDZIE BICIE
-                                qDebug() << "TUTAJ BEDZIE BICIE";
-                                return true;
+                                if(zbijanie(wszystkieFigury[i])) {
+                                    czyRuszany = true;
+                                    return true;
+                                } else return false;
                             }
                         }
                     }
@@ -53,9 +56,10 @@ bool Pionek::sprawdzRuch(int x, int y)
                             if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                             else {
                                 //TUTAJ BEDZIE BICIE
-                                qDebug() << "TUTAJ BEDZIE BICIE";
-                                czyRuszany = true;
-                                return true;
+                                if(zbijanie(wszystkieFigury[i])) {
+                                    czyRuszany = true;
+                                    return true;
+                                } else return false;
                             }
                         }
                     } return false;
@@ -85,8 +89,10 @@ bool Pionek::sprawdzRuch(int x, int y)
                             if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                             else {
                                 //TUTAJ BEDZIE BICIE
-                                qDebug() << "TUTAJ BEDZIE BICIE";
-                                return true;
+                                if(zbijanie(wszystkieFigury[i])) {
+                                    czyRuszany = true;
+                                    return true;
+                                } else return false;
                             }
                         }
                     } return false;
@@ -108,9 +114,10 @@ bool Pionek::sprawdzRuch(int x, int y)
                             if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                             else {
                                 //TUTAJ BEDZIE BICIE
-                                qDebug() << "TUTAJ BEDZIE BICIE";
-                                czyRuszany = true;
-                                return true;
+                                if(zbijanie(wszystkieFigury[i])) {
+                                    czyRuszany = true;
+                                    return true;
+                                } else return false;
                             }
                         }
                     } return false;
@@ -125,4 +132,9 @@ bool Pionek::sprawdzRuch(int x, int y)
             } else return false;
         }
     }
+}
+
+bool operator ==(Pionek &p1, Pionek &p2)
+{
+    return (p1.getId() == p2.getId());
 }

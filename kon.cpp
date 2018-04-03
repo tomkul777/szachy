@@ -3,6 +3,8 @@
 
 Kon::Kon(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
+    this->nazwa = "Kon";
+
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/kon_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/kon_c.png"));
 
@@ -19,11 +21,15 @@ bool Kon::sprawdzRuch(int x, int y)
                 if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                 else {
                     //TUTAJ BEDZIE BICIE
-                    qDebug() << "TUTAJ BEDZIE BICIE";
-                    return true;
+                    return zbijanie(wszystkieFigury[i]);
                 }
             }
         }
         return true;
     } else return false;
+}
+
+bool operator ==(Kon &k1, Kon &k2)
+{
+    return (k1.getId() == k2.getId());
 }

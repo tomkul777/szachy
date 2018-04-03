@@ -3,6 +3,8 @@
 
 Hetman::Hetman(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
+    this->nazwa = "Hetman";
+
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/hetman_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/hetman_c.png"));
 
@@ -29,8 +31,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                     if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                     else {
                         //TUTAJ BEDZIE BICIE
-                        qDebug() << "TUTAJ BEDZIE BICIE";
-                        return true;
+                        return zbijanie(wszystkieFigury[i]);
                     }
                 }
             }
@@ -52,8 +53,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                     if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                     else {
                         //TUTAJ BEDZIE BICIE
-                        qDebug() << "TUTAJ BEDZIE BICIE";
-                        return true;
+                        return zbijanie(wszystkieFigury[i]);
                     }
                 }
             }
@@ -75,8 +75,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -95,8 +94,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -117,8 +115,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -137,8 +134,7 @@ bool Hetman::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -146,4 +142,9 @@ bool Hetman::sprawdzRuch(int x, int y)
         }
         return true;
     } else return false;
+}
+
+bool operator ==(Hetman &h1, Hetman &h2)
+{
+    return (h1.getId() == h2.getId());
 }

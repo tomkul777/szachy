@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QVector>
+#include <QDebug>
 
 #include "pole.h"
 #include "figura.h"
@@ -26,15 +27,15 @@ int main(int argc, char *argv[])
 
     QVector<Figura*> figury;
 
-    /* DLA TESTOW
+    /*// DLA TESTOW
     for(int i=0; i<8; i++) {
         figury.append(new Pionek(&w, i, 7, 1));
     }
 
     for(int i=0; i<8; i++) {
         figury.append(new Pionek(&w, i, 0, 2));
-    }
-    */
+    }*/
+
 
     //BIAŁE
     figury.append(new Wieza(&w, 0, 7, 1));

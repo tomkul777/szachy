@@ -3,6 +3,9 @@
 
 Wieza::Wieza(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
+    this->nazwa = "Wieza";
+    this->czyRuszany = false;
+
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/wieza_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/wieza_c.png"));
 
@@ -29,12 +32,14 @@ bool Wieza::sprawdzRuch(int x, int y)
                     if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                     else {
                         //TUTAJ BEDZIE BICIE
-                        qDebug() << "TUTAJ BEDZIE BICIE";
-                        return true;
+                        if(zbijanie(wszystkieFigury[i])) {
+                            czyRuszany = true;
+                            return true;
+                        } else return false;
                     }
                 }
             }
-
+            czyRuszany = true;
             return true;
         } else {
             int minX = x<this->x ? x : this->x;
@@ -52,12 +57,20 @@ bool Wieza::sprawdzRuch(int x, int y)
                     if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                     else {
                         //TUTAJ BEDZIE BICIE
-                        qDebug() << "TUTAJ BEDZIE BICIE";
-                        return true;
+                        if(zbijanie(wszystkieFigury[i])) {
+                            czyRuszany = true;
+                            return true;
+                        } else return false;
                     }
                 }
             }
         }
+        czyRuszany = true;
         return true;
     } else return false;
+}
+
+bool operator==(Wieza &w1, Wieza &w2)
+{
+    return (w1.getId() == w2.getId());
 }

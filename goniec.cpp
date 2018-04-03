@@ -3,6 +3,8 @@
 
 Goniec::Goniec(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
+    this->nazwa = "Goniec";
+
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/goniec_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/goniec_c.png"));
 
@@ -31,8 +33,7 @@ bool Goniec::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -51,8 +52,7 @@ bool Goniec::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -73,8 +73,7 @@ bool Goniec::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -93,8 +92,7 @@ bool Goniec::sprawdzRuch(int x, int y)
                         if(this->player == wszystkieFigury[i]->getPlayer()) return false;
                         else {
                             //TUTAJ BEDZIE BICIE
-                            qDebug() << "TUTAJ BEDZIE BICIE";
-                            return true;
+                            return zbijanie(wszystkieFigury[i]);
                         }
                     }
                 }
@@ -102,4 +100,9 @@ bool Goniec::sprawdzRuch(int x, int y)
         }
         return true;
     } else return false;
+}
+
+bool operator ==(Goniec &g1, Goniec &g2)
+{
+    return (g1.getId() == g2.getId());
 }

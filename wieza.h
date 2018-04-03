@@ -5,9 +5,14 @@
 
 class Wieza : public Figura
 {
+private:
+    bool czyRuszany;
+
 public:
     Wieza(QWidget *parent, int x, int y, int player);
     bool sprawdzRuch(int x, int y);
 };
+
+bool operator==(Wieza w1, Wieza w2);
 
 #endif // WIEZA_H

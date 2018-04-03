@@ -1,4 +1,5 @@
 #include "figura.h"
+#include <QDebug>
 
 Figura::Figura(QWidget *parent, int x, int y, int player) : Pole(parent, x, y)
 {
@@ -6,6 +7,16 @@ Figura::Figura(QWidget *parent, int x, int y, int player) : Pole(parent, x, y)
     wszystkieFigury.push_back(this);
 
     this->id = wszystkieFigury.size()-1;
+}
+
+Figura::~Figura()
+{
+    for(int i=this->id+1; i<wszystkieFigury.size(); i++) {
+        wszystkieFigury[i]->setId(i-1);
+    }
+
+    wszystkieFigury.remove(this->id);
+    //qDebug() << "USUWAMY XD, ilosc = " << wszystkieFigury.size();
 }
 
 int Figura::getX()
@@ -21,6 +32,33 @@ int Figura::getY()
 int Figura::getPlayer()
 {
     return this->player;
+}
+
+int Figura::getId()
+{
+    return this->id;
+}
+
+void Figura::setId(int id)
+{
+    this->id = id;
+}
+
+QString Figura::getNazwa()
+{
+    return this->nazwa;
+}
+
+bool Figura::zbijanie(Figura *f)
+{
+    if(f->getNazwa() != "Krol") {
+        f->~Figura();
+        //qDebug() << "ZBIJAM";
+        return true;
+    } else {
+        //qDebug() << "STOP, TO KROL";
+        return false;
+    }
 }
 
 QVector<Figura*> Figura::wszystkieFigury;

@@ -10,4 +10,6 @@ public:
     bool sprawdzRuch(int x, int y);
 };
 
+bool operator ==(Hetman &h1, Hetman &h2);
+
 #endif // HETMAN_H
