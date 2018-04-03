@@ -11,7 +11,6 @@ private:
 public:
     Krol(QWidget *parent, int x, int y, int player);
     bool sprawdzRuch(int x, int y);
-    void roszada();
 };
 
 bool operator ==(Krol &k1, Krol &k2);
