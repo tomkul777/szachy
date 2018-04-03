@@ -13,7 +13,8 @@ Hetman::Hetman(QWidget *parent, int x, int y, int player) : Figura(parent, x, y,
 
 bool Hetman::sprawdzRuch(int x, int y)
 {
-    if((x-this->x == y-this->y) || (x-this->x == (y-this->y)*(-1)) ||
+    if(this->x == x && this->y == y) return false;
+    else if((x-this->x == y-this->y) || (x-this->x == (y-this->y)*(-1)) ||
             (x-this->x == 0) || (y-this->y == 0)) {
         if(x-this->x == 0) {
             int minY = y<this->y ? y : this->y;

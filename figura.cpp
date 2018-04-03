@@ -3,6 +3,8 @@
 
 Figura::Figura(QWidget *parent, int x, int y, int player) : Pole(parent, x, y)
 {
+    czyRuszany = false;
+
     this->player = player;
     wszystkieFigury.push_back(this);
 
@@ -49,6 +51,21 @@ QString Figura::getNazwa()
     return this->nazwa;
 }
 
+bool Figura::getCzyRuszany()
+{
+    return this->czyRuszany;
+}
+
+void Figura::setX(int x)
+{
+    this->x = x;
+}
+
+void Figura::setY(int y)
+{
+    this->y = y;
+}
+
 bool Figura::zbijanie(Figura *f)
 {
     if(f->getNazwa() != "Krol") {
@@ -80,6 +97,8 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
 
     if(x>=0 && x<=7 && y>=0 && y<=7) {
         if(this->sprawdzRuch(x, y)) {
+            if(this->czyRuszany == false) this->czyRuszany = true;
+
             this->x = x;
             this->y = y;
             this->move(x*80, y*80);

@@ -13,7 +13,8 @@ Kon::Kon(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, playe
 
 bool Kon::sprawdzRuch(int x, int y)
 {
-    if(((x-this->x == 2 || x-this->x == -2) && (y-this->y == 1 || y-this->y == -1)) ||
+    if(this->x == x && this->y == y) return false;
+    else if(((x-this->x == 2 || x-this->x == -2) && (y-this->y == 1 || y-this->y == -1)) ||
             ((y-this->y == 2 || y-this->y == -2) && (x-this->x == 1 || x-this->x == -1))) {
         for(int i=0; i<wszystkieFigury.size(); i++) {
             if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)

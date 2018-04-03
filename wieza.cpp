@@ -4,7 +4,6 @@
 Wieza::Wieza(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
     this->nazwa = "Wieza";
-    this->czyRuszany = false;
 
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/wieza_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/wieza_c.png"));
@@ -14,8 +13,8 @@ Wieza::Wieza(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, p
 
 bool Wieza::sprawdzRuch(int x, int y)
 {
-    if(x-this->x == 0 || y-this->y == 0) {
-
+    if(this->x == x && this->y == y) return false;
+    else if(x-this->x == 0 || y-this->y == 0) {
         if(x-this->x == 0) {
             int minY = y<this->y ? y : this->y;
             int maxY = y>this->y ? y : this->y;

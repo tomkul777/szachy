@@ -4,7 +4,6 @@
 Pionek::Pionek(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
     this->nazwa = "Pionek";
-    this->czyRuszany = false;
 
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/pionek_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/pionek_c.png"));
@@ -14,8 +13,9 @@ Pionek::Pionek(QWidget *parent, int x, int y, int player) : Figura(parent, x, y,
 
 bool Pionek::sprawdzRuch(int x, int y)
 {
-    if(player == 1) {
-        if(czyRuszany) {
+    if(this->x == x && this->y == y) return false;
+    else if(player == 1) {
+        if(this->czyRuszany) {
             if(y-this->y == -1) {
                 if(x == this->x) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -31,7 +31,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
-                                    czyRuszany = true;
                                     return true;
                                 } else return false;
                             }
@@ -47,7 +46,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
-                    czyRuszany = true;
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -57,7 +55,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
-                                    czyRuszany = true;
                                     return true;
                                 } else return false;
                             }
@@ -69,12 +66,11 @@ bool Pionek::sprawdzRuch(int x, int y)
                     if((wszystkieFigury[i]->getY() == y+1) && (wszystkieFigury[i]->getX() == x)
                             && (i != this->id)) return false;
                 }
-                czyRuszany = true;
                 return true;
             } else return false;
         }
     } else {
-        if(czyRuszany) {
+        if(this->czyRuszany) {
             if(y-this->y == 1) {
                 if(x == this->x) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -90,7 +86,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
-                                    czyRuszany = true;
                                     return true;
                                 } else return false;
                             }
@@ -105,7 +100,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
-                    czyRuszany = true;
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -115,7 +109,6 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
-                                    czyRuszany = true;
                                     return true;
                                 } else return false;
                             }
@@ -124,10 +117,9 @@ bool Pionek::sprawdzRuch(int x, int y)
                 } else return false;
             } else if((y-this->y == 2) && (x == this->x)) {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getY() == y+1) && (wszystkieFigury[i]->getX() == x)
+                    if((wszystkieFigury[i]->getY() == y-1) && (wszystkieFigury[i]->getX() == x)
                             && (i != this->id)) return false;
                 }
-                czyRuszany = true;
                 return true;
             } else return false;
         }

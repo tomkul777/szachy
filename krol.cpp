@@ -4,7 +4,6 @@
 Krol::Krol(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
 {
     this->nazwa = "Krol";
-    this->czyRuszany = false;
 
     if(player == 1) this->setPixmap(QPixmap(":/biale/PNG/krol_b.png"));
     else this->setPixmap(QPixmap(":/czarne/PNG/krol_c.png"));
@@ -14,7 +13,8 @@ Krol::Krol(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, pla
 
 bool Krol::sprawdzRuch(int x, int y)
 {
-    if(x-this->x < 2 && x-this->x > -2 && y-this->y < 2 && y-this->y > -2) {
+    if(this->x == x && this->y == y) return false;
+    else if(x-this->x < 2 && x-this->x > -2 && y-this->y < 2 && y-this->y > -2) {
         for(int i=0; i<wszystkieFigury.size(); i++) {
             if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
                     && (i != this->id)) {
@@ -30,7 +30,76 @@ bool Krol::sprawdzRuch(int x, int y)
         }
         czyRuszany = true;
         return true;
+    } else if(czyRuszany == false ) {
+        //ROSZADA
+        if(y-this->y == 0) {
+                if(x-this->x == 2) {
+                    for(int i=0; i<wszystkieFigury.size(); i++) {
+                        if(wszystkieFigury[i]->getX() == 7 && wszystkieFigury[i]->getY() == this->y
+                                && wszystkieFigury[i]->getCzyRuszany() == false && wszystkieFigury[i]->getNazwa() == "Wieza") {
+                            for(int i=0; i<wszystkieFigury.size(); i++) {
+                                if(wszystkieFigury[i]->getX() > this->x && wszystkieFigury[i]->getX() < 7
+                                        && wszystkieFigury[i]->getY() == this->y && i != this->id) return false;
+                            }
+                            wszystkieFigury[i]->setX(x-1);
+                            wszystkieFigury[i]->move(wszystkieFigury[i]->getX()*80, wszystkieFigury[i]->getY()*80);
+                            czyRuszany = true;
+                            return true;
+                        }
+                    }
+                    return false;
+                } else if(x-this->x == -2) {
+                    for(int i=0; i<wszystkieFigury.size(); i++) {
+                        if(wszystkieFigury[i]->getX() == 0 && wszystkieFigury[i]->getY() == this->y
+                                && wszystkieFigury[i]->getCzyRuszany() == false && wszystkieFigury[i]->getNazwa() == "Wieza") {
+                            for(int i=0; i<wszystkieFigury.size(); i++) {
+                                if(wszystkieFigury[i]->getX() > 0 && wszystkieFigury[i]->getX() < this->x
+                                        && wszystkieFigury[i]->getY() == this->y && i != this->id) return false;
+                            }
+                            wszystkieFigury[i]->setX(x+1);
+                            wszystkieFigury[i]->move(wszystkieFigury[i]->getX()*80, wszystkieFigury[i]->getY()*80);
+                            czyRuszany = true;
+                            return true;
+                        }
+                    }
+                    return false;
+                } else return false;
+            } else return false;
     } else return false;
+}
+
+void Krol::roszada()
+{
+    //ROSZADA
+    /*if(y-this->y == 0) {
+        if(x-this->x == 2) {
+            for(int i=0; i<wszystkieFigury.size(); i++) {
+                if(wszystkieFigury[i]->getX() == 7 && wszystkieFigury[i]->getY() == this->y
+                        && wszystkieFigury[i]->getCzyRuszany() == false && wszystkieFigury[i]->getNazwa() == "Wieza") {
+                    for(int i=0; i<wszystkieFigury.size(); i++) {
+                        if(wszystkieFigury[i]->getX() > this->x && wszystkieFigury[i]->getX() < 7
+                                && wszystkieFigury[i]->getY() == this->y && i != this->id) return false;
+                    }
+                    czyRuszany = true;
+                    return true;
+                }
+                return false;
+            }
+        } else if(x-this->x == -2) {
+            for(int i=0; i<wszystkieFigury.size(); i++) {
+                if(wszystkieFigury[i]->getX() == 0 && wszystkieFigury[i]->getY() == this->y
+                        && wszystkieFigury[i]->getCzyRuszany() == false && wszystkieFigury[i]->getNazwa() == "Wieza") {
+                    for(int i=0; i<wszystkieFigury.size(); i++) {
+                        if(wszystkieFigury[i]->getX() > 0 && wszystkieFigury[i]->getX() < this->x
+                                && wszystkieFigury[i]->getY() == this->y && i != this->id) return false;
+                    }
+                    czyRuszany = true;
+                    return true;
+                }
+                return false;
+            }
+        } else return false;
+    } else return false;*/
 }
 
 
@@ -38,3 +107,28 @@ bool operator ==(Krol &k1, Krol &k2)
 {
     return (k1.getId() == k2.getId());
 }
+
+
+/*//ROSZADA
+        if((x-this->x == 2 || x-this->x == -2) && (y-this->y == 0)) {
+            for(int i=0; i<wszystkieFigury.size(); i++) {
+                if(wszystkieFigury[i]->getY() == this->y && wszystkieFigury[i]->getNazwa() == "Wieza") {
+                    if(x-this->x == 2 && wszystkieFigury[i]->getX() == 7 && wszystkieFigury[i]->getY() == this->y
+                            && wszystkieFigury[i]->getCzyRuszany() == false) {
+                        for(int i=0; i<wszystkieFigury.size(); i++) {
+                            if((wszystkieFigury[i]->getX() > this->x) && (wszystkieFigury[i]->getX() < 7)
+                                    && (wszystkieFigury[i]->getY() == this->y) && i != this->id) return false;
+                        }
+                        czyRuszany = true;
+                        return true;
+                    } else if(x-this->x == -2 && wszystkieFigury[i]->getX() == 0) {
+                        for(int i=0; i<wszystkieFigury.size(); i++) {
+                            if((wszystkieFigury[i]->getX() < this->x) && (wszystkieFigury[i]->getX() > 0)
+                                    && (wszystkieFigury[i]->getY() == this->y) && i != this->id) return false;
+                        }
+                        czyRuszany = true;
+                        return true;
+                    } else return false;
+                }
+            }
+        } else return false;*/

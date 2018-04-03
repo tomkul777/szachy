@@ -14,19 +14,25 @@ protected:
     int player;
     int id;
     QString nazwa;
+    bool czyRuszany;
     static QVector<Figura*> wszystkieFigury;
 
 public:
     Figura(QWidget *parent, int x, int y, int player);
     ~Figura();
+    virtual bool sprawdzRuch(int x, int y) = 0;
+    bool zbijanie(Figura *f);
+
     int getX();
     int getY();
     int getPlayer();
     int getId();
-    void setId(int id);
     QString getNazwa();
-    virtual bool sprawdzRuch(int x, int y) = 0;
-    bool zbijanie(Figura *f);
+    bool getCzyRuszany();
+
+    void setX(int x);
+    void setY(int y);
+    void setId(int id);
 
     void mousePressEvent(QMouseEvent *ev);
     void mouseMoveEvent(QMouseEvent *ev);
