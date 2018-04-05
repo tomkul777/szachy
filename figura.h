@@ -22,6 +22,7 @@ public:
     ~Figura();
     virtual bool sprawdzRuch(int x, int y) = 0;
     bool zbijanie(Figura *f);
+    void promocja(Figura *f);
 
     int getX();
     int getY();

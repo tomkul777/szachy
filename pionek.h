@@ -5,12 +5,10 @@
 
 class Pionek : public Figura
 {
-private:
-    bool czyRuszany;
-
 public:
     Pionek(QWidget *parent, int x, int y, int player);
     bool sprawdzRuch(int x, int y);
+    void promocja(int x, int y);
 };
 
 bool operator ==(Pionek &p1, Pionek &p2);

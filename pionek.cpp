@@ -1,4 +1,5 @@
 #include "pionek.h"
+#include "hetman.h"
 #include <QDebug>
 
 Pionek::Pionek(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, player)
@@ -22,6 +23,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
+                    promocja(x, y);
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -31,6 +33,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
+                                    promocja(x, y);
                                     return true;
                                 } else return false;
                             }
@@ -46,6 +49,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
+                    promocja(x, y);
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -55,6 +59,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
+                                    promocja(x, y);
                                     return true;
                                 } else return false;
                             }
@@ -66,6 +71,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                     if((wszystkieFigury[i]->getY() == y+1) && (wszystkieFigury[i]->getX() == x)
                             && (i != this->id)) return false;
                 }
+                promocja(x, y);
                 return true;
             } else return false;
         }
@@ -77,6 +83,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
+                    promocja(x, y);
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -86,6 +93,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
+                                    promocja(x, y);
                                     return true;
                                 } else return false;
                             }
@@ -100,6 +108,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) return false;
                     }
+                    promocja(x, y);
                     return true;
                 } else if((x-this->x == 1) || (x-this->x == -1)) {
                     for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -109,6 +118,7 @@ bool Pionek::sprawdzRuch(int x, int y)
                             else {
                                 //TUTAJ BEDZIE BICIE
                                 if(zbijanie(wszystkieFigury[i])) {
+                                    promocja(x, y);
                                     return true;
                                 } else return false;
                             }
@@ -120,9 +130,21 @@ bool Pionek::sprawdzRuch(int x, int y)
                     if((wszystkieFigury[i]->getY() == y-1) && (wszystkieFigury[i]->getX() == x)
                             && (i != this->id)) return false;
                 }
+                promocja(x, y);
                 return true;
             } else return false;
         }
+    }
+}
+
+void Pionek::promocja(int x, int y)
+{
+    if(this->player == 1 && y == 0) {
+        wszystkieFigury.push_back(new Hetman(parentWidget(), x, y, 1));
+        this->~Figura();
+    } else if(this->player == 2 && y == 7) {
+        wszystkieFigury.push_back(new Hetman(parentWidget(), x, y, 2));
+        this->~Figura();
     }
 }
 
