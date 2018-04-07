@@ -23,23 +23,6 @@ bool Wieza::sprawdzRuch(int x, int y)
                 if((wszystkieFigury[i]->getY() > minY) && (wszystkieFigury[i]->getY() < maxY)
                         && (wszystkieFigury[i]->getX()-x == 0)) return false;
             }
-
-            for(int i=0; i<wszystkieFigury.size(); i++) {
-                if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX()-x == 0)
-                        && (i != this->id)) {
-
-                    if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                    else {
-                        //TUTAJ BEDZIE BICIE
-                        if(zbijanie(wszystkieFigury[i])) {
-                            czyRuszany = true;
-                            return true;
-                        } else return false;
-                    }
-                }
-            }
-            czyRuszany = true;
-            return true;
         } else {
             int minX = x<this->x ? x : this->x;
             int maxX = x>this->x ? x : this->x;
@@ -48,23 +31,7 @@ bool Wieza::sprawdzRuch(int x, int y)
                 if((wszystkieFigury[i]->getX() > minX) && (wszystkieFigury[i]->getX() < maxX)
                         && (wszystkieFigury[i]->getY()-y == 0)) return false;
             }
-
-            for(int i=0; i<wszystkieFigury.size(); i++) {
-                if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY()-y == 0)
-                        && (i != this->id)) {
-
-                    if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                    else {
-                        //TUTAJ BEDZIE BICIE
-                        if(zbijanie(wszystkieFigury[i])) {
-                            czyRuszany = true;
-                            return true;
-                        } else return false;
-                    }
-                }
-            }
         }
-        czyRuszany = true;
         return true;
     } else return false;
 }

@@ -15,7 +15,6 @@ bool Goniec::sprawdzRuch(int x, int y)
 {
     if(this->x == x && this->y == y) return false;
     else if(x-this->x == y-this->y || x-this->x == (y-this->y)*(-1)) {
-
         if(x > this->x) {
             if(y > this->y) {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
@@ -26,36 +25,12 @@ bool Goniec::sprawdzRuch(int x, int y)
                         return false;
                     }
                 }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (wszystkieFigury[i]->getX()-this->x == wszystkieFigury[i]->getY()-this->y)
-                            && (x > this->x) && (y > this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
-                }
             } else {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
                     if((wszystkieFigury[i]->getX() > this->x) && (wszystkieFigury[i]->getX() < x)
                             && (wszystkieFigury[i]->getY() > y) && (wszystkieFigury[i]->getY() < this->y)
                             && (wszystkieFigury[i]->getX()-this->x == this->y-wszystkieFigury[i]->getY())
                             && (x > this->x) && (y < this->y) && (i != this->id)) return false;
-                }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (wszystkieFigury[i]->getX()-this->x == this->y-wszystkieFigury[i]->getY())
-                            && (x > this->x) && (y < this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
                 }
             }
         } else {
@@ -66,36 +41,12 @@ bool Goniec::sprawdzRuch(int x, int y)
                             && (this->x-wszystkieFigury[i]->getX() == wszystkieFigury[i]->getY()-this->y)
                             && (x < this->x) && (y > this->y) && (i != this->id)) return false;
                 }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (this->x-wszystkieFigury[i]->getX() == wszystkieFigury[i]->getY()-this->y)
-                            && (x < this->x) && (y > this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
-                }
             } else {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
                     if((wszystkieFigury[i]->getX() > x) && (wszystkieFigury[i]->getX() < this->x)
                             && (wszystkieFigury[i]->getY() > y) && (wszystkieFigury[i]->getY() < this->y)
                             && (this->x-wszystkieFigury[i]->getX() == this->y-wszystkieFigury[i]->getY())
                             && (x < this->x) && (y < this->y) && (i != this->id)) return false;
-                }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (this->x-wszystkieFigury[i]->getX() == this->y-wszystkieFigury[i]->getY())
-                            && (x < this->x) && (y < this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
                 }
             }
         }

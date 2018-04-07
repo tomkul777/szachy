@@ -29,14 +29,9 @@ bool Pionek::sprawdzRuch(int x, int y)
                     for(int i=0; i<wszystkieFigury.size(); i++) {
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) {
-                            if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                            else {
-                                //TUTAJ BEDZIE BICIE
-                                if(zbijanie(wszystkieFigury[i])) {
-                                    promocja(x, y);
-                                    return true;
-                                } else return false;
-                            }
+                            if(wszystkieFigury[i]->getPlayer() != this->player
+                                    && wszystkieFigury[i]->getNazwa() != "Krol") promocja(x, y);
+                            return true;
                         }
                     }
                     return false;
@@ -55,14 +50,9 @@ bool Pionek::sprawdzRuch(int x, int y)
                     for(int i=0; i<wszystkieFigury.size(); i++) {
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) {
-                            if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                            else {
-                                //TUTAJ BEDZIE BICIE
-                                if(zbijanie(wszystkieFigury[i])) {
-                                    promocja(x, y);
-                                    return true;
-                                } else return false;
-                            }
+                            if(wszystkieFigury[i]->getPlayer() != this->player
+                                    && wszystkieFigury[i]->getNazwa() != "Krol") promocja(x, y);
+                            return true;
                         }
                     } return false;
                 } else return false;
@@ -89,14 +79,9 @@ bool Pionek::sprawdzRuch(int x, int y)
                     for(int i=0; i<wszystkieFigury.size(); i++) {
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) {
-                            if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                            else {
-                                //TUTAJ BEDZIE BICIE
-                                if(zbijanie(wszystkieFigury[i])) {
-                                    promocja(x, y);
-                                    return true;
-                                } else return false;
-                            }
+                            if(wszystkieFigury[i]->getPlayer() != this->player
+                                    && wszystkieFigury[i]->getNazwa() != "Krol") promocja(x, y);
+                            return true;
                         }
                     } return false;
                 } else return false;
@@ -114,14 +99,9 @@ bool Pionek::sprawdzRuch(int x, int y)
                     for(int i=0; i<wszystkieFigury.size(); i++) {
                         if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX() == x)
                                 && (i != this->id)) {
-                            if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                            else {
-                                //TUTAJ BEDZIE BICIE
-                                if(zbijanie(wszystkieFigury[i])) {
-                                    promocja(x, y);
-                                    return true;
-                                } else return false;
-                            }
+                            if(wszystkieFigury[i]->getPlayer() != this->player
+                                    && wszystkieFigury[i]->getNazwa() != "Krol") promocja(x, y);
+                            return true;
                         }
                     } return false;
                 } else return false;

@@ -14,23 +14,8 @@ Krol::Krol(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, pla
 bool Krol::sprawdzRuch(int x, int y)
 {
     if(this->x == x && this->y == y) return false;
-    else if(x-this->x < 2 && x-this->x > -2 && y-this->y < 2 && y-this->y > -2) {
-        for(int i=0; i<wszystkieFigury.size(); i++) {
-            if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                    && (i != this->id)) {
-                if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                else {
-                    //TUTAJ BEDZIE BICIE
-                    if(zbijanie(wszystkieFigury[i])) {
-                        czyRuszany = true;
-                        return true;
-                    } else return false;
-                }
-            }
-        }
-        czyRuszany = true;
-        return true;
-    } else if(czyRuszany == false ) {
+    else if(x-this->x < 2 && x-this->x > -2 && y-this->y < 2 && y-this->y > -2) return true;
+    else if(this->czyRuszany == false ) {
         //ROSZADA
 
         if(y-this->y == 0) {
@@ -44,7 +29,6 @@ bool Krol::sprawdzRuch(int x, int y)
                         }
                         wszystkieFigury[i]->setX(x-1);
                         wszystkieFigury[i]->move(wszystkieFigury[i]->getX()*80, wszystkieFigury[i]->getY()*80);
-                        czyRuszany = true;
                         return true;
                     }
                 }
@@ -59,7 +43,6 @@ bool Krol::sprawdzRuch(int x, int y)
                         }
                         wszystkieFigury[i]->setX(x+1);
                         wszystkieFigury[i]->move(wszystkieFigury[i]->getX()*80, wszystkieFigury[i]->getY()*80);
-                        czyRuszany = true;
                         return true;
                     }
                 }

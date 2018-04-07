@@ -24,20 +24,6 @@ bool Hetman::sprawdzRuch(int x, int y)
                 if((wszystkieFigury[i]->getY() > minY) && (wszystkieFigury[i]->getY() < maxY)
                         && (wszystkieFigury[i]->getX()-x == 0)) return false;
             }
-
-            for(int i=0; i<wszystkieFigury.size(); i++) {
-                if((wszystkieFigury[i]->getY() == y) && (wszystkieFigury[i]->getX()-x == 0)
-                        && (i != this->id)) {
-
-                    if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                    else {
-                        //TUTAJ BEDZIE BICIE
-                        return zbijanie(wszystkieFigury[i]);
-                    }
-                }
-            }
-
-            return true;
         } else if(y-this->y == 0) {
             int minX = x<this->x ? x : this->x;
             int maxX = x>this->x ? x : this->x;
@@ -45,18 +31,6 @@ bool Hetman::sprawdzRuch(int x, int y)
             for(int i=0; i<wszystkieFigury.size(); i++) {
                 if((wszystkieFigury[i]->getX() > minX) && (wszystkieFigury[i]->getX() < maxX)
                         && (wszystkieFigury[i]->getY()-y == 0)) return false;
-            }
-
-            for(int i=0; i<wszystkieFigury.size(); i++) {
-                if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY()-y == 0)
-                        && (i != this->id)) {
-
-                    if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                    else {
-                        //TUTAJ BEDZIE BICIE
-                        return zbijanie(wszystkieFigury[i]);
-                    }
-                }
             }
         } else if(x > this->x) {
             if(y > this->y) {
@@ -68,36 +42,12 @@ bool Hetman::sprawdzRuch(int x, int y)
                         return false;
                     }
                 }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (wszystkieFigury[i]->getX()-this->x == wszystkieFigury[i]->getY()-this->y)
-                            && (x > this->x) && (y > this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
-                }
             } else {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
                     if((wszystkieFigury[i]->getX() > this->x) && (wszystkieFigury[i]->getX() < x)
                             && (wszystkieFigury[i]->getY() > y) && (wszystkieFigury[i]->getY() < this->y)
                             && (wszystkieFigury[i]->getX()-this->x == this->y-wszystkieFigury[i]->getY())
                             && (x > this->x) && (y < this->y) && (i != this->id)) return false;
-                }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (wszystkieFigury[i]->getX()-this->x == this->y-wszystkieFigury[i]->getY())
-                            && (x > this->x) && (y < this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
                 }
             }
         } else {
@@ -108,36 +58,12 @@ bool Hetman::sprawdzRuch(int x, int y)
                             && (this->x-wszystkieFigury[i]->getX() == wszystkieFigury[i]->getY()-this->y)
                             && (x < this->x) && (y > this->y) && (i != this->id)) return false;
                 }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (this->x-wszystkieFigury[i]->getX() == wszystkieFigury[i]->getY()-this->y)
-                            && (x < this->x) && (y > this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
-                }
             } else {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
                     if((wszystkieFigury[i]->getX() > x) && (wszystkieFigury[i]->getX() < this->x)
                             && (wszystkieFigury[i]->getY() > y) && (wszystkieFigury[i]->getY() < this->y)
                             && (this->x-wszystkieFigury[i]->getX() == this->y-wszystkieFigury[i]->getY())
                             && (x < this->x) && (y < this->y) && (i != this->id)) return false;
-                }
-
-                for(int i=0; i<wszystkieFigury.size(); i++) {
-                    if((wszystkieFigury[i]->getX() == x) && (wszystkieFigury[i]->getY() == y)
-                            && (this->x-wszystkieFigury[i]->getX() == this->y-wszystkieFigury[i]->getY())
-                            && (x < this->x) && (y < this->y) && (i != this->id)) {
-                        if(this->player == wszystkieFigury[i]->getPlayer()) return false;
-                        else {
-                            //TUTAJ BEDZIE BICIE
-                            return zbijanie(wszystkieFigury[i]);
-                        }
-                    }
                 }
             }
         }

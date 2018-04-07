@@ -11,18 +11,21 @@ private:
     QPoint offset;
 
 protected:
+    static QVector<Figura *> wszystkieFigury;
     int player;
     int id;
     QString nazwa;
     bool czyRuszany;
-    static QVector<Figura*> wszystkieFigury;
 
 public:
     Figura(QWidget *parent, int x, int y, int player);
     ~Figura();
+
+    static int aktualnyRuch;
+
     virtual bool sprawdzRuch(int x, int y) = 0;
-    bool zbijanie(Figura *f);
-    void promocja(Figura *f);
+    void zbijanie(Figura *f);
+    bool szach();
 
     int getX();
     int getY();
