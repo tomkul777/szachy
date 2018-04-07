@@ -11,7 +11,7 @@ Goniec::Goniec(QWidget *parent, int x, int y, int player) : Figura(parent, x, y,
     this->setGeometry(x*80, y*80, 80, 80);
 }
 
-bool Goniec::sprawdzRuch(int x, int y)
+bool Goniec::sprawdzRuch(int &x, int &y)
 {
     if(this->x == x && this->y == y) return false;
     else if(x-this->x == y-this->y || x-this->x == (y-this->y)*(-1)) {

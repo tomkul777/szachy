@@ -23,9 +23,9 @@ public:
 
     static int aktualnyRuch;
 
-    virtual bool sprawdzRuch(int x, int y) = 0;
+    virtual bool sprawdzRuch(int &x, int &y) = 0;
     void zbijanie(Figura *f);
-    bool szach();
+    bool szach(int x, int y);
 
     int getX();
     int getY();

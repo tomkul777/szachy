@@ -11,7 +11,7 @@ Kon::Kon(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, playe
     this->setGeometry(x*80, y*80, 80, 80);
 }
 
-bool Kon::sprawdzRuch(int x, int y)
+bool Kon::sprawdzRuch(int &x, int &y)
 {
     if(this->x == x && this->y == y) return false;
     else if(((x-this->x == 2 || x-this->x == -2) && (y-this->y == 1 || y-this->y == -1)) ||

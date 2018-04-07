@@ -7,7 +7,7 @@ class Wieza : public Figura
 {
 public:
     Wieza(QWidget *parent, int x, int y, int player);
-    bool sprawdzRuch(int x, int y);
+    bool sprawdzRuch(int &x, int &y);
 };
 
 bool operator==(Wieza w1, Wieza w2);

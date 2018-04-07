@@ -12,7 +12,7 @@ Pionek::Pionek(QWidget *parent, int x, int y, int player) : Figura(parent, x, y,
     this->setGeometry(x*80, y*80, 80, 80);
 }
 
-bool Pionek::sprawdzRuch(int x, int y)
+bool Pionek::sprawdzRuch(int &x, int &y)
 {
     if(this->x == x && this->y == y) return false;
     else if(player == 1) {
@@ -117,16 +117,68 @@ bool Pionek::sprawdzRuch(int x, int y)
     }
 }
 
-void Pionek::promocja(int x, int y)
+void Pionek::promocja(int &x, int &y)
 {
     if(this->player == 1 && y == 0) {
-        wszystkieFigury.push_back(new Hetman(parentWidget(), x, y, 1));
-        this->~Figura();
+        if (!szach(-1, -1)) {
+            Hetman *h = new Hetman(parentWidget(), this->x, this->y, 1);
+
+            if (!szach(x, y)) {
+                this->~Figura();
+                h->setX(x);
+                h->setY(y);
+                h->move(x*80, y*80);
+            } else {
+                h->~Figura();
+                x = this->x;
+                y = this->y;
+            }
+        } else {
+            x = this->x;
+            y = this->y;
+        }
     } else if(this->player == 2 && y == 7) {
-        wszystkieFigury.push_back(new Hetman(parentWidget(), x, y, 2));
-        this->~Figura();
+        if (!szach(-1, -1)) {
+            Hetman *h = new Hetman(parentWidget(), this->x, this->y, 2);
+
+            if (!szach(x, y)) {
+                this->~Figura();
+                h->setX(x);
+                h->setY(y);
+                h->move(x*80, y*80);
+            } else {
+                h->~Figura();
+                x = this->x;
+                y = this->y;
+            }
+        } else {
+            x = this->x;
+            y = this->y;
+        }
     }
 }
+
+/*if (!szach(x, y)) {
+    if(this->player == 1 && y == 0) {
+        Hetman *h = new Hetman(parentWidget(), this->x, this->y, 1);
+        this->~Figura();
+
+        if (!szach(x, y)) {
+            h->setX(x);
+            h->setY(y);
+            h->move(x*80, y*80);
+        }
+    } else if(this->player == 2 && y == 7) {
+        Hetman *h = new Hetman(parentWidget(), this->x, this->y, 2);
+        this->~Figura();
+
+        if (!szach(x, y)) {
+            h->setX(x);
+            h->setY(y);
+            h->move(x*80, y*80);
+        }
+    }
+}*/
 
 bool operator ==(Pionek &p1, Pionek &p2)
 {

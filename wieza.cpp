@@ -11,7 +11,7 @@ Wieza::Wieza(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, p
     this->setGeometry(x*80, y*80, 80, 80);
 }
 
-bool Wieza::sprawdzRuch(int x, int y)
+bool Wieza::sprawdzRuch(int &x, int &y)
 {
     if(this->x == x && this->y == y) return false;
     else if(x-this->x == 0 || y-this->y == 0) {

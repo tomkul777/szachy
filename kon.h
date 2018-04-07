@@ -7,7 +7,7 @@ class Kon : public Figura
 {
 public:
     Kon(QWidget *parent, int x, int y, int player);
-    bool sprawdzRuch(int x, int y);
+    bool sprawdzRuch(int &x, int &y);
 };
 
 bool operator ==(Kon &k1, Kon &k2);
