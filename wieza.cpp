@@ -13,6 +13,11 @@ Wieza::Wieza(QWidget *parent, int x, int y, int player) : Figura(parent, x, y, p
 
 bool Wieza::sprawdzRuch(int &x, int &y)
 {
+    for(int i=0; i<wszystkieFigury.size(); i++) {
+        if(wszystkieFigury[i]->getX() == x && wszystkieFigury[i]->getY() == y
+                && wszystkieFigury[i]->getPlayer() == this->player) return false;
+    }
+
     if(this->x == x && this->y == y) return false;
     else if(x-this->x == 0 || y-this->y == 0) {
         if(x-this->x == 0) {

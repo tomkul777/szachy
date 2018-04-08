@@ -17,8 +17,6 @@ Figura::~Figura()
     for(int i=this->id; i<wszystkieFigury.size(); i++) {
         wszystkieFigury[i]->setId(i);
     }
-
-    //qDebug() << "USUWAMY XD, ilosc = " << wszystkieFigury.size();
 }
 
 QVector<Figura*> Figura::wszystkieFigury;
@@ -78,7 +76,6 @@ void Figura::zbijanie(Figura *f)
         this->x = f->getX();
         this->y = f->getY();
         this->move(f->getX()*80, f->getY()*80);
-        //qDebug() << "ZBIJAM";
 }
 
 bool Figura::szach(int x, int y)
@@ -92,13 +89,11 @@ bool Figura::szach(int x, int y)
         }
     }
 
-    //if(aktualnyRuch == 2) qDebug() << "Czarny krol(" << wszystkieFigury[idKrol]->getX() << ", " << wszystkieFigury[idKrol]->getY() << ")";
+    int xx = wszystkieFigury[idKrol]->getX();
+    int yy = wszystkieFigury[idKrol]->getY();
 
     for(int i=0; i<wszystkieFigury.size(); i++) {
         if(wszystkieFigury[i]->getPlayer() != aktualnyRuch && wszystkieFigury[i]->getX() != x && wszystkieFigury[i]->getY() != y) {
-            int xx = wszystkieFigury[idKrol]->getX();
-            int yy = wszystkieFigury[idKrol]->getY();
-
             if(wszystkieFigury[i]->sprawdzRuch(xx, yy)) {
                 return true;
             }
@@ -107,9 +102,130 @@ bool Figura::szach(int x, int y)
     return false;
 }
 
+bool Figura::mat()
+{
+    if(szach(-1, -1)) {
+        for(int i=0; i<wszystkieFigury.size(); i++) {
+            if(wszystkieFigury[i]->getPlayer() == aktualnyRuch) {
+                int stareX = wszystkieFigury[i]->getX();
+                int stareY = wszystkieFigury[i]->getY();
+
+                qDebug() << wszystkieFigury[i]->getNazwa() << " " << wszystkieFigury[i]->getId();
+                for(int a=0; a<8; a++) {
+                    for(int b=0; b<8; b++) {
+                        if(wszystkieFigury[i]->sprawdzRuch(b, a)) {
+                            wszystkieFigury[i]->setX(b);
+                            wszystkieFigury[i]->setY(a);
+
+                            bool czysto1 = true;
+
+                            for(int j=0; j<wszystkieFigury.size(); j++) {
+                                int testX = wszystkieFigury[j]->getX();
+                                int testY = wszystkieFigury[j]->getY();
+
+                                if(wszystkieFigury[j]->getX() == b && wszystkieFigury[j]->getY() == a
+                                        && i != j && wszystkieFigury[j]->getPlayer() != aktualnyRuch) {
+                                    czysto1 = false;
+
+                                    wszystkieFigury[j]->setX(-5);
+                                    wszystkieFigury[j]->setY(-5);
+
+                                    if(!szach(-1, -1)) {
+                                        wszystkieFigury[j]->setX(testX);
+                                        wszystkieFigury[j]->setY(testY);
+                                        wszystkieFigury[i]->setX(stareX);
+                                        wszystkieFigury[i]->setY(stareY);
+                                        return false;
+                                    }
+
+                                    wszystkieFigury[j]->setX(testX);
+                                    wszystkieFigury[j]->setY(testY);
+                                    break;
+                                }
+                            }
+
+                            if(czysto1 == true) {
+                                if(!szach(-1, -1)) {
+                                    wszystkieFigury[i]->setX(stareX);
+                                    wszystkieFigury[i]->setY(stareY);
+                                    return false;
+                                }
+                            }
+
+                            wszystkieFigury[i]->setX(stareX);
+                            wszystkieFigury[i]->setY(stareY);
+
+                            /*if(!szach(-1, -1)) {
+                                qDebug() << "da sie wydeffowac :) " << wszystkieFigury[i]->getNazwa() << " " << wszystkieFigury[i]->getId();
+                                qDebug() << "a=" << a << ", b=" << b;
+                                wszystkieFigury[i]->setX(stareX);
+                                wszystkieFigury[i]->setY(stareY);
+                                return false;
+                            }
+                            wszystkieFigury[i]->setX(stareX);
+                            wszystkieFigury[i]->setY(stareY);*/
+
+
+
+
+                            /*int testX = wszystkieFigury[i]->getX();
+                            int testY = wszystkieFigury[i]->getY();
+
+                            //zbijanie(wszystkieFigury[i]);
+                            //this->move(x*80, y*80);
+
+                            wszystkieFigury[i]->setX(-5);
+                            wszystkieFigury[i]->setY(-5);
+
+                            if(szach(-1, -1)) {
+                                qDebug() << "a jednak drugi szach :(";
+                                this->x = staryX;
+                                this->y = staryY;
+                                this->move(staryX*80, staryY*80);
+                                wszystkieFigury[i]->setX(testX);
+                                wszystkieFigury[i]->setY(testY);
+                                return true
+                            }*/
+
+                            /*for(int j=0; j<wszystkieFigury.size(); j++) {
+                                if(wszystkieFigury[j]->getX() == b && wszystkieFigury[j]->getY() == a
+                                        && i != j && wszystkieFigury[j]->getPlayer() != aktualnyRuch) {
+
+                                    if(!szach(b, a)) {
+                                        qDebug() << "da sie wydeffowac xd :) " << wszystkieFigury[i]->getNazwa() << " " << wszystkieFigury[i]->getId();
+                                        qDebug() << "a=" << a << ", b=" << b;
+                                        wszystkieFigury[i]->setX(stareX);
+                                        wszystkieFigury[i]->setY(stareY);
+                                        return false;
+                                    }
+                                }
+                            }
+
+                            if(!szach(-1, -1)) {
+                                qDebug() << "da sie wydeffowac :) " << wszystkieFigury[i]->getNazwa() << " " << wszystkieFigury[i]->getId();
+                                qDebug() << "a=" << a << ", b=" << b;
+                                wszystkieFigury[i]->setX(stareX);
+                                wszystkieFigury[i]->setY(stareY);
+                                return false;
+                            }
+                            wszystkieFigury[i]->setX(stareX);
+                            wszystkieFigury[i]->setY(stareY);*/
+                        }
+                    }
+                }
+                wszystkieFigury[i]->setX(stareX);
+                wszystkieFigury[i]->setY(stareY);
+                qDebug() << "===============";
+            }
+        }
+        return true;
+    } else return false;
+}
+
 void Figura::mousePressEvent(QMouseEvent *ev)
 {
     if(this->player == aktualnyRuch) offset = ev->pos();
+    qDebug() << "ID=" << this->getId() << "  x=" << this->x << ", y=" << this->y;
 }
 
 void Figura::mouseMoveEvent(QMouseEvent *ev)
@@ -118,7 +234,7 @@ void Figura::mouseMoveEvent(QMouseEvent *ev)
 }
 
 void Figura::mouseReleaseEvent(QMouseEvent *ev)
-{    
+{        
     if(this->player == aktualnyRuch) {
         int x = (mapToParent(ev->pos()).x() - offset.x() + 40)/80;
         int y = (mapToParent(ev->pos()).y() - offset.y() + 40)/80;
@@ -137,7 +253,6 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                             this->move(this->x*80, this->y*80);
                         } else {
                             if(wszystkieFigury[i]->getNazwa() != "Krol") {
-
                                 int staryX = this->x;
                                 int staryY = this->y;
                                 this->x = x;
@@ -150,12 +265,39 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                     qDebug() << "Nie mozesz tu isc bo będzie szach ;(";
                                 } else {
                                     qDebug() << "Ok, tu mozesz";
-                                    if(this->czyRuszany == false) this->czyRuszany = true;
-                                    zbijanie(wszystkieFigury[i]);
-                                    this->move(x*80, y*80);
+                                    int testX = wszystkieFigury[i]->getX();
+                                    int testY = wszystkieFigury[i]->getY();
 
-                                    if(aktualnyRuch == 1) aktualnyRuch = 2;
-                                    else aktualnyRuch = 1;
+                                    //zbijanie(wszystkieFigury[i]);
+                                    //this->move(x*80, y*80);
+
+                                    wszystkieFigury[i]->setX(-5);
+                                    wszystkieFigury[i]->setY(-5);
+
+                                    if(szach(-1, -1)) {
+                                        qDebug() << "a jednak drugi szach :(";
+                                        this->x = staryX;
+                                        this->y = staryY;
+                                        this->move(staryX*80, staryY*80);
+                                        wszystkieFigury[i]->setX(testX);
+                                        wszystkieFigury[i]->setY(testY);
+                                        break;
+                                    }
+
+                                    wszystkieFigury[i]->setX(testX);
+                                    wszystkieFigury[i]->setY(testY);
+
+                                    if(!szach(x, y)){
+                                        qDebug() << "brak szacha przy zbijaniu";
+                                        zbijanie(wszystkieFigury[i]);
+                                        this->move(x*80, y*80);
+
+                                        if(this->czyRuszany == false) this->czyRuszany = true;
+                                        if(aktualnyRuch == 1) aktualnyRuch = 2;
+                                        else aktualnyRuch = 1;
+
+                                        if(mat()) qDebug() << "TUTAJ POWINIEN BYC KONIEC GRY";
+                                    }
                                 }
                             } else {
                                 this->move(this->x*80, this->y*80);
@@ -184,6 +326,8 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
 
                         if(aktualnyRuch == 1) aktualnyRuch = 2;
                         else aktualnyRuch = 1;
+
+                        if(mat()) qDebug() << "TUTAJ POWINIEN BYC KONIEC GRY";
                     }
                 }
             } else {

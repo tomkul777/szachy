@@ -13,6 +13,11 @@ Hetman::Hetman(QWidget *parent, int x, int y, int player) : Figura(parent, x, y,
 
 bool Hetman::sprawdzRuch(int &x, int &y)
 {
+    for(int i=0; i<wszystkieFigury.size(); i++) {
+        if(wszystkieFigury[i]->getX() == x && wszystkieFigury[i]->getY() == y
+                && wszystkieFigury[i]->getPlayer() == this->player) return false;
+    }
+
     if(this->x == x && this->y == y) return false;
     else if((x-this->x == y-this->y) || (x-this->x == (y-this->y)*(-1)) ||
             (x-this->x == 0) || (y-this->y == 0)) {

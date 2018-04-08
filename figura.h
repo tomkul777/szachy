@@ -26,6 +26,7 @@ public:
     virtual bool sprawdzRuch(int &x, int &y) = 0;
     void zbijanie(Figura *f);
     bool szach(int x, int y);
+    bool mat();
 
     int getX();
     int getY();
