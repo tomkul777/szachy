@@ -20,10 +20,10 @@ bool Krol::sprawdzRuch(int &x, int &y)
 
     if(this->x == x && this->y == y) return false;
     else if(x-this->x < 2 && x-this->x > -2 && y-this->y < 2 && y-this->y > -2) return true;
-    else if(this->czyRuszany == false) {
+    else if(this->czyRuszany == false && y-this->y == 0 && (x-this->x == 2 || x-this->x == -2)) {
+        return true;
         //ROSZADA
-
-        if(y-this->y == 0) {
+        /*if(y-this->y == 0) {
             if(x-this->x == 2) {
                 for(int i=0; i<wszystkieFigury.size(); i++) {
                     if(wszystkieFigury[i]->getX() == 7 && wszystkieFigury[i]->getY() == this->y
@@ -53,7 +53,7 @@ bool Krol::sprawdzRuch(int &x, int &y)
                 }
                 return false;
             } else return false;
-        } else return false;
+        } else return false;*/
     } else return false;
 }
 
