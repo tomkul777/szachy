@@ -58,8 +58,3 @@ bool Goniec::sprawdzRuch(int &x, int &y)
         return true;
     } else return false;
 }
-
-bool operator ==(Goniec &g1, Goniec &g2)
-{
-    return (g1.getId() == g2.getId());
-}

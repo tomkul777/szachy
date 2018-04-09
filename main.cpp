@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QVector>
+#include <QTextBrowser>
 #include <QDebug>
 
 #include "pole.h"
@@ -11,12 +12,13 @@
 #include "krol.h"
 #include "hetman.h"
 #include "pionek.h"
+#include "logi.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.setFixedSize(640, 640);
+    //w.setFixedSize(640, 640);
 
     Pole *poleSzach[8][8];
     for(int i=0; i<8; i++) {

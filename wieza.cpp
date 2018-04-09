@@ -40,8 +40,3 @@ bool Wieza::sprawdzRuch(int &x, int &y)
         return true;
     } else return false;
 }
-
-bool operator==(Wieza &w1, Wieza &w2)
-{
-    return (w1.getId() == w2.getId());
-}

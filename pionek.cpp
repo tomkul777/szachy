@@ -162,8 +162,3 @@ void Pionek::promocja(int &x, int &y)
         }
     }
 }
-
-bool operator ==(Pionek &p1, Pionek &p2)
-{
-    return (p1.getId() == p2.getId());
-}

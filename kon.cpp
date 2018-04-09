@@ -29,8 +29,3 @@ bool Kon::sprawdzRuch(int &x, int &y)
     }
     else return false;
 }
-
-bool operator ==(Kon &k1, Kon &k2)
-{
-    return (k1.getId() == k2.getId());
-}

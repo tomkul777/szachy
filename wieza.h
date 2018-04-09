@@ -10,6 +10,4 @@ public:
     bool sprawdzRuch(int &x, int &y);
 };
 
-bool operator==(Wieza w1, Wieza w2);
-
 #endif // WIEZA_H

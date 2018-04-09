@@ -10,6 +10,4 @@ public:
     bool sprawdzRuch(int &x, int &y);
 };
 
-bool operator ==(Krol &k1, Krol &k2);
-
 #endif // KROL_H

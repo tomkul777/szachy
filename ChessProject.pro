@@ -33,7 +33,8 @@ SOURCES += \
     kon.cpp \
     krol.cpp \
     hetman.cpp \
-    pionek.cpp
+    pionek.cpp \
+    logi.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS += \
     kon.h \
     krol.h \
     hetman.h \
-    pionek.h
+    pionek.h \
+    logi.h
 
 FORMS += \
         mainwindow.ui

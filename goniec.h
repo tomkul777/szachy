@@ -10,6 +10,4 @@ public:
     bool sprawdzRuch(int &x, int &y);
 };
 
-bool operator ==(Goniec &g1, Goniec &g2);
-
 #endif // GONIEC_H

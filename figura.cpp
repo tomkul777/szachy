@@ -9,6 +9,8 @@ Figura::Figura(QWidget *parent, int x, int y, int player) : Pole(parent, x, y)
     wszystkieFigury.push_back(this);
 
     this->id = wszystkieFigury.size()-1;
+
+    if(this->logi == NULL) this->logi = new Logi(parent);
 }
 
 Figura::~Figura()
@@ -21,6 +23,7 @@ Figura::~Figura()
 
 QVector<Figura*> Figura::wszystkieFigury;
 int Figura::aktualnyRuch = 1;
+Logi* Figura::logi;
 
 int Figura::getX()
 {
@@ -69,6 +72,8 @@ void Figura::setY(int y)
 
 void Figura::zbijanie(Figura *f)
 {
+        *logi << this << " zbija " << f << "\n";
+
         f->~Figura();
 
         if(this->czyRuszany == false) this->czyRuszany = true;
@@ -105,6 +110,8 @@ bool Figura::szach(int x, int y)
 bool Figura::mat()
 {
     if(szach(-1, -1)) {
+        *logi << "SZACH\n";
+
         for(int i=0; i<wszystkieFigury.size(); i++) {
             if(wszystkieFigury[i]->getPlayer() == aktualnyRuch) {
                 int stareX = wszystkieFigury[i]->getX();
@@ -162,6 +169,9 @@ bool Figura::mat()
                 qDebug() << "===============";
             }
         }
+        if(aktualnyRuch == 2) *logi << "KONIEC GRY!!! WYGRYWAJĄ BIAŁE, GRATULACJE\n";
+        else *logi << "KONIEC GRY!!! WYGRYWAJĄ CZARNE, GRATULACJE\n";
+
         return true;
     } else return false;
 }
@@ -287,8 +297,13 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                             if(this->czyRuszany == false) this->czyRuszany = true;
                                             this->move(x*80, y*80);
 
-                                            if(aktualnyRuch == 1) aktualnyRuch = 2;
-                                            else aktualnyRuch = 1;
+                                            if(aktualnyRuch == 1) {
+                                                *logi << "Białe robią roszadę\n";
+                                                aktualnyRuch = 2;
+                                            } else {
+                                                *logi << "Czarne robią roszadę\n";
+                                                aktualnyRuch = 1;
+                                            }
                                         } else {
                                             this->x = staryX;
                                             this->y = staryY;
@@ -328,8 +343,13 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                             if(this->czyRuszany == false) this->czyRuszany = true;
                                             this->move(x*80, y*80);
 
-                                            if(aktualnyRuch == 1) aktualnyRuch = 2;
-                                            else aktualnyRuch = 1;
+                                            if(aktualnyRuch == 1) {
+                                                *logi << "Białe robią roszadę\n";
+                                                aktualnyRuch = 2;
+                                            } else {
+                                                *logi << "Czarne robią roszadę\n";
+                                                aktualnyRuch = 1;
+                                            }
                                         } else {
                                             this->x = staryX;
                                             this->y = staryY;
@@ -375,4 +395,16 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
             this->move(this->x*80, this->y*80);
         }
     }
+}
+
+Logi& operator <<(Logi &l, Figura *f)
+{
+    l.insertPlainText(f->getNazwa());
+    return l;
+}
+
+Logi& operator <<(Logi &l, QString s)
+{
+    l.insertPlainText(s);
+    return l;
 }

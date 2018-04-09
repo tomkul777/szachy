@@ -75,8 +75,3 @@ bool Hetman::sprawdzRuch(int &x, int &y)
         return true;
     } else return false;
 }
-
-bool operator ==(Hetman &h1, Hetman &h2)
-{
-    return (h1.getId() == h2.getId());
-}

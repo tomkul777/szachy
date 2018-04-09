@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 
 #include "pole.h"
+#include "logi.h"
 
 class Figura : public Pole
 {
@@ -12,6 +13,7 @@ private:
 
 protected:
     static QVector<Figura *> wszystkieFigury;
+    static Logi *logi;
     int player;
     int id;
     QString nazwa;
@@ -43,5 +45,8 @@ public:
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
 };
+
+Logi& operator <<(Logi &l, Figura *f);
+Logi& operator <<(Logi &l, QString s);
 
 #endif // FIGURA_H

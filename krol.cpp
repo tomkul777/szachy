@@ -56,8 +56,3 @@ bool Krol::sprawdzRuch(int &x, int &y)
         } else return false;*/
     } else return false;
 }
-
-bool operator ==(Krol &k1, Krol &k2)
-{
-    return (k1.getId() == k2.getId());
-}
