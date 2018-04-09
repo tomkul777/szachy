@@ -11,6 +11,19 @@ Figura::Figura(QWidget *parent, int x, int y, int player) : Pole(parent, x, y)
     this->id = wszystkieFigury.size()-1;
 
     if(this->logi == NULL) this->logi = new Logi(parent);
+    if(t_aktualnyRuch == NULL) {
+        t_aktualnyRuch = new QLabel(parent);
+        t_aktualnyRuch->setText("AKTUALNY RUCH");
+        t_aktualnyRuch->setStyleSheet("font-size: 14px; color: black; font-weight: 400");
+        t_aktualnyRuch->setGeometry(690, 20, 120, 30);
+    }
+
+    if(im_aktualnyRuch == NULL) {
+        im_aktualnyRuch = new QLabel(parent);
+        im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player1.png"));
+        im_aktualnyRuch->setStyleSheet("border: 1px solid black;");
+        im_aktualnyRuch->setGeometry(820, 20, 30, 30);
+    }
 }
 
 Figura::~Figura()
@@ -25,6 +38,8 @@ QVector<Figura*> Figura::wszystkieFigury;
 int Figura::aktualnyRuch = 1;
 Logi* Figura::logi;
 bool Figura::czyKoniec = false;
+QLabel* Figura::im_aktualnyRuch;
+QLabel* Figura::t_aktualnyRuch;
 
 int Figura::getX()
 {
@@ -268,8 +283,14 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                         this->move(x*80, y*80);
 
                                         if(this->czyRuszany == false) this->czyRuszany = true;
-                                        if(aktualnyRuch == 1) aktualnyRuch = 2;
-                                        else aktualnyRuch = 1;
+
+                                        if(aktualnyRuch == 1) {
+                                            aktualnyRuch = 2;
+                                            im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player2.png"));
+                                        } else {
+                                            aktualnyRuch = 1;
+                                            im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player1.png"));
+                                        }
 
                                         if(mat()) koniec(parentWidget());
                                     }
@@ -321,9 +342,11 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                             if(aktualnyRuch == 1) {
                                                 *logi << "Białe robią roszadę\n";
                                                 aktualnyRuch = 2;
+                                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player2.png"));
                                             } else {
                                                 *logi << "Czarne robią roszadę\n";
                                                 aktualnyRuch = 1;
+                                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player1.png"));
                                             }
                                         } else {
                                             this->x = staryX;
@@ -367,9 +390,11 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                             if(aktualnyRuch == 1) {
                                                 *logi << "Białe robią roszadę\n";
                                                 aktualnyRuch = 2;
+                                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player2.png"));
                                             } else {
                                                 *logi << "Czarne robią roszadę\n";
                                                 aktualnyRuch = 1;
+                                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player1.png"));
                                             }
                                         } else {
                                             this->x = staryX;
@@ -402,8 +427,13 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                             if(this->czyRuszany == false) this->czyRuszany = true;
                             this->move(x*80, y*80);
 
-                            if(aktualnyRuch == 1) aktualnyRuch = 2;
-                            else aktualnyRuch = 1;
+                            if(aktualnyRuch == 1) {
+                                aktualnyRuch = 2;
+                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player2.png"));
+                            } else {
+                                aktualnyRuch = 1;
+                                im_aktualnyRuch->setPixmap(QPixmap(":/gracze/PNG/player1.png"));
+                            }
 
                             if(mat()) koniec(parentWidget());
                         }

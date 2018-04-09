@@ -9,7 +9,9 @@
 class Figura : public Pole
 {
 private:
-    QPoint offset;
+    QPoint offset; 
+    static QLabel *im_aktualnyRuch;
+    static QLabel *t_aktualnyRuch;
 
 protected:
     static QVector<Figura *> wszystkieFigury;

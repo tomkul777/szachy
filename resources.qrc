@@ -19,4 +19,8 @@
         <file>PNG/pionek_b.png</file>
         <file>PNG/wieza_b.png</file>
     </qresource>
+    <qresource prefix="/gracze">
+        <file>PNG/player1.png</file>
+        <file>PNG/player2.png</file>
+    </qresource>
 </RCC>
