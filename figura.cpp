@@ -24,6 +24,7 @@ Figura::~Figura()
 QVector<Figura*> Figura::wszystkieFigury;
 int Figura::aktualnyRuch = 1;
 Logi* Figura::logi;
+bool Figura::czyKoniec = false;
 
 int Figura::getX()
 {
@@ -169,27 +170,40 @@ bool Figura::mat()
                 qDebug() << "===============";
             }
         }
-        if(aktualnyRuch == 2) *logi << "KONIEC GRY!!! WYGRYWAJĄ BIAŁE, GRATULACJE\n";
-        else *logi << "KONIEC GRY!!! WYGRYWAJĄ CZARNE, GRATULACJE\n";
+        czyKoniec = true;
 
+        QTextBrowser *wynik = new QTextBrowser(parentWidget());
+        wynik->setGeometry(220, 300, 200, 40);
+        wynik->setStyleSheet("background-color: red; font-size: 11px; color: white;"
+                             "font-weight: 600; border: 3px solid black;");
+
+        *logi << "... I MAT\n";
+        if(aktualnyRuch == 2) {
+            wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ BIAŁE");
+            *logi << "KONIEC GRY!!! WYGRYWAJĄ BIAŁE\nGRATULACJE\n";
+        } else {
+            wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ CZARNE");
+            *logi << "KONIEC GRY!!! WYGRYWAJĄ CZARNE\nGRATULACJE\n";
+        }
+
+        wynik->show();
         return true;
     } else return false;
 }
 
 void Figura::mousePressEvent(QMouseEvent *ev)
 {
-    if(this->player == aktualnyRuch) offset = ev->pos();
-    //qDebug() << "ID=" << this->getId() << "  x=" << this->x << ", y=" << this->y;
+    if(this->player == aktualnyRuch && !czyKoniec) offset = ev->pos();
 }
 
 void Figura::mouseMoveEvent(QMouseEvent *ev)
 {
-    if(this->player == aktualnyRuch) this->move(mapToParent(ev->pos()) - offset);
+    if(this->player == aktualnyRuch && !czyKoniec) this->move(mapToParent(ev->pos()) - offset);
 }
 
 void Figura::mouseReleaseEvent(QMouseEvent *ev)
 {        
-    if(this->player == aktualnyRuch) {
+    if(this->player == aktualnyRuch && !czyKoniec) {
         int x = (mapToParent(ev->pos()).x() - offset.x() + 40)/80;
         int y = (mapToParent(ev->pos()).y() - offset.y() + 40)/80;
 
