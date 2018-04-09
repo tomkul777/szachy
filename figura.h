@@ -13,9 +13,8 @@ private:
 
 protected:
     static QVector<Figura *> wszystkieFigury;
-    static Logi *logi;
     static bool czyKoniec;
-    static int aktualnyRuch;
+    QWidget *w;
     int player;
     int id;
     QString nazwa;
@@ -25,10 +24,14 @@ public:
     Figura(QWidget *parent, int x, int y, int player);
     ~Figura();
 
+    static Logi *logi;
+    static int aktualnyRuch;
+
     virtual bool sprawdzRuch(int &x, int &y) = 0;
     void zbijanie(Figura *f);
     bool szach(int x, int y);
     bool mat();
+    static void koniec(QWidget *w);
 
     int getX();
     int getY();

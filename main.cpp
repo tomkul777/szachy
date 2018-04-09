@@ -18,7 +18,12 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    //w.setFixedSize(640, 640);
+
+    /*
+
+    QPushButton *b_cofnijRuch = new QPushButton(&w);
+    b_cofnijRuch->setText("Cofnij Ruch");
+    b_cofnijRuch->setGeometry(700, 220, 140, 30);*/
 
     Pole *poleSzach[8][8];
     for(int i=0; i<8; i++) {
@@ -28,16 +33,6 @@ int main(int argc, char *argv[])
     }
 
     QVector<Figura*> figury;
-
-    /*// DLA TESTOW
-    for(int i=0; i<8; i++) {
-        figury.append(new Pionek(&w, i, 7, 1));
-    }
-
-    for(int i=0; i<8; i++) {
-        figury.append(new Pionek(&w, i, 0, 2));
-    }*/
-
 
     //BIAŁE
     figury.append(new Wieza(&w, 0, 7, 1));

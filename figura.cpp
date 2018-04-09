@@ -170,25 +170,32 @@ bool Figura::mat()
                 qDebug() << "===============";
             }
         }
-        czyKoniec = true;
-
-        QTextBrowser *wynik = new QTextBrowser(parentWidget());
-        wynik->setGeometry(220, 300, 200, 40);
-        wynik->setStyleSheet("background-color: red; font-size: 11px; color: white;"
-                             "font-weight: 600; border: 3px solid black;");
-
         *logi << "... I MAT\n";
-        if(aktualnyRuch == 2) {
-            wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ BIAŁE");
-            *logi << "KONIEC GRY!!! WYGRYWAJĄ BIAŁE\nGRATULACJE\n";
-        } else {
-            wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ CZARNE");
-            *logi << "KONIEC GRY!!! WYGRYWAJĄ CZARNE\nGRATULACJE\n";
-        }
+        if(aktualnyRuch == 2) *logi << "KONIEC GRY!!! WYGRYWAJĄ BIAŁE\nGRATULACJE\n";
+        else *logi << "KONIEC GRY!!! WYGRYWAJĄ CZARNE\nGRATULACJE\n";
 
-        wynik->show();
         return true;
     } else return false;
+}
+
+void Figura::koniec(QWidget *w)
+{
+    czyKoniec = true;
+
+    QTextBrowser *wynik = new QTextBrowser(w);
+    wynik->setGeometry(220, 300, 200, 40);
+    wynik->setStyleSheet("background-color: red; font-size: 11px; color: white;"
+                         "font-weight: 600; border: 3px solid black;");
+
+    if(aktualnyRuch == 2) {
+        wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ BIAŁE");
+    } else {
+        wynik->setHtml("<p style=\"text-align: center\">KONIEC GRY!!!<br>WYGRYWAJĄ CZARNE");
+    }
+
+    wynik->show();
+
+    //qDebug() << "TUTAJ POWINIEN BYC KONIEC GRY";
 }
 
 void Figura::mousePressEvent(QMouseEvent *ev)
@@ -264,7 +271,7 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                                         if(aktualnyRuch == 1) aktualnyRuch = 2;
                                         else aktualnyRuch = 1;
 
-                                        if(mat()) qDebug() << "TUTAJ POWINIEN BYC KONIEC GRY";
+                                        if(mat()) koniec(parentWidget());
                                     }
                                 }
                             } else {
@@ -398,7 +405,7 @@ void Figura::mouseReleaseEvent(QMouseEvent *ev)
                             if(aktualnyRuch == 1) aktualnyRuch = 2;
                             else aktualnyRuch = 1;
 
-                            if(mat()) qDebug() << "TUTAJ POWINIEN BYC KONIEC GRY";
+                            if(mat()) koniec(parentWidget());
                         }
                     }
                 }

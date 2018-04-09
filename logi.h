@@ -5,9 +5,6 @@
 
 class Logi : public QTextBrowser
 {
-private:
-    static Logi *wsk;
-
 public:
     Logi(QWidget *parent);
     Logi(const Logi &logi);
